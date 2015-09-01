@@ -5,7 +5,7 @@
         <script src="lib/threeGeoJSON.js"></script>
                 
         <!-- Three.js library, movement controls, and jquery for the geojson-->
-        <script src="lib/three.min.js.old"></script>
+        <script src="lib/three.min.js"></script>
         <script src="lib/TrackballControls.js"></script>  
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
         
@@ -42,14 +42,41 @@
 //                    color: 'red'
 //                })
 //            });
-            var test_json = $.getJSON("test_geojson/ethnicity/Water.geojson", function (data) {
+            var test_json = $.getJSON("data_unzipped/ethnicity/Water.geojson", function (data) {
                 drawThreeGeo(data, 10, 'sphere', {
-                    color: 'red',
+                    color: 'blue',
                     blending: THREE.AdditiveBlending,
                     transparent: true,
                     opacity: 0.3
                 })
             });
+            var pointSets = [
+                {
+                    name: "Indigenous",
+                    colour: "red"
+                },
+                {
+                    name: "Other",
+                    colour: "white"
+                },
+                {
+                    name: "Aus-NZ",
+                    colour: "green"
+                },
+            ];
+            for (var i in pointSets) {
+                var name = pointSets[i].name;
+                var colour = pointSets[i].colour;
+                var test_json = $.getJSON("data_unzipped/ethnicity/" + name + ".geojson", function (data) {
+                    drawThreeGeo(data, 10, 'sphere', {
+                        color: colour,
+                        blending: THREE.AdditiveBlending,
+                        transparent: true,
+                        opacity: 0.7,
+                        sizeAttenuation: false
+                    })
+                });
+            }
 
         //Set the camera position
             camera.position.z = 20;            
