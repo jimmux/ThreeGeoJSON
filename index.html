@@ -5,7 +5,7 @@
         <script src="lib/threeGeoJSON.js"></script>
                 
         <!-- Three.js library, movement controls, and jquery for the geojson-->
-        <script src="lib/three.min.js"></script>
+        <script src="lib/three.min.js.old"></script>
         <script src="lib/TrackballControls.js"></script>  
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
         
@@ -37,12 +37,20 @@
             scene.add(sphere);
             
         //Draw the GeoJSON
-            var test_json = $.getJSON("test_geojson/countries_states.geojson", function (data) { 
+//            var test_json = $.getJSON("test_geojson/countries_states.geojson", function (data) {
+//                drawThreeGeo(data, 10, 'sphere', {
+//                    color: 'red'
+//                })
+//            });
+            var test_json = $.getJSON("test_geojson/ethnicity/Water.geojson", function (data) {
                 drawThreeGeo(data, 10, 'sphere', {
-                    color: 'red'
-                })    
-            });          
-                        
+                    color: 'red',
+                    blending: THREE.AdditiveBlending,
+                    transparent: true,
+                    opacity: 0.3
+                })
+            });
+
         //Set the camera position
             camera.position.z = 20;            
             
